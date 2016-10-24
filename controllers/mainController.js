@@ -1,11 +1,12 @@
 app.controller("MainController", function ($scope,$state, $http, AuthenticationService){
  
+ var token ;
  if(localStorage['token']){
      token = JSON.parse(localStorage['token']);
  }else{
      token = "Something";
  }
-    var token = JSON.parse(localStorage['token']);
+   
     AuthenticationService.checkToken(token);
 
     $scope.logout = function(){
