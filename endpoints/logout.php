@@ -1,10 +1,19 @@
 <?php
 include("../connection.php");
 
-$data = json_decode(file_get_contents("php://input"));
-$token = $data->token;
+try{
+    $data = json_decode(file_get_contents("php://input"));
+    $token = $data->token;
 
-$db = $conn->query("UPDATE users SET token='LOGED OUT' WHERE token=$token");
-echo "success";
+    $q = "UPDATE users SET token='LOGGED OUT' WHERE token='$token'";
+    // I used exec insted of query 'cause no results are returned'
+    $conn->exec($q); 
+    echo "Logged out successfully";
+
+}catch(PDOException $e){
+    echo $q . "<br>" . $e->getMessage();
+}
+
+$conn = null;
 
 ?>

@@ -1,7 +1,7 @@
 var app= angular.module("UserAuthTutorial",["ui.router"]);
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
-      $urlRouterProvider.otherwise('/');
+$urlRouterProvider.otherwise('/');
     $stateProvider
     .state("login", {
         url:"/",
@@ -9,9 +9,10 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         templateUrl:"views/login.html"
     })
 
-    .state("application",{
+    .state("application", {
         url:"/app",
         controller:"MainController",
-        templateUrl: "views/application.html"
+        templateUrl: "views/application.html",
+        params: {'test': null}
     })
 }])
