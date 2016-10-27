@@ -18,12 +18,16 @@ app.controller("LoginController", function($scope, $http, $state){
         }
 
         $http.post('endpoints/signup.php',data).success(function(response){
-            
-            console.log(response.token);
-            console.log(response.username);
- alert(response.token);
-            localStorage.setItem("token",response.token);
-            $state.go("application");
+            if(response == "User and Password are required")
+            {
+               alert(response);
+            }else
+            {
+                console.log(response.token);
+                console.log(response.username);
+                localStorage.setItem("token",response.token);
+                $state.go("application");
+            }
            
         }).error(function(error){
             console.error(error);
@@ -37,7 +41,7 @@ app.controller("LoginController", function($scope, $http, $state){
         }
 
         $http.post('endpoints/login.php',data).success(function(response){
-            
+            console.log(response);
             localStorage.setItem("token",JSON.parse(response));
             $state.go("application");
 
