@@ -1,4 +1,4 @@
-app.controller("LoginController", function($scope, $http, $state){
+  app.controller("LoginController", function($scope, $http, $state){
     //Variables
     $scope.signUpInfo={
         username:undefined,
@@ -12,26 +12,30 @@ app.controller("LoginController", function($scope, $http, $state){
     
     //Functions
     $scope.signUserUp =function (){
-        var data= {
-            username: $scope.signUpInfo.username,
-            password: $scope.signUpInfo.password
+
+        if($scope.myForm.$valid){
+            var data= {
+                username: $scope.signUpInfo.username,
+                password: $scope.signUpInfo.password
+            }
+
+            $http.post('endpoints/signup.php',data).success(function(response){
+                if(response == "User and Password are required")
+                {
+                alert(response);
+                }else
+                {
+                    console.log(response.token);
+                    console.log(response.username);
+                    localStorage.setItem("token",response.token);
+                    $state.go("application");
+                }
+            
+            }).error(function(error){
+                console.error(error);
+            });
         }
 
-        $http.post('endpoints/signup.php',data).success(function(response){
-            if(response == "User and Password are required")
-            {
-               alert(response);
-            }else
-            {
-                console.log(response.token);
-                console.log(response.username);
-                localStorage.setItem("token",response.token);
-                $state.go("application");
-            }
-           
-        }).error(function(error){
-            console.error(error);
-        });
     };
 
     $scope.loginUser = function (){
@@ -51,3 +55,29 @@ app.controller("LoginController", function($scope, $http, $state){
     };
     //Init
 })
+
+  var compareTo = function() {
+ 
+    return {
+      require: "ngModel",
+      scope: {
+        otherModelValue: "=compareTo"
+      },
+      link: function(scope, element, attributes, ngModel) {
+
+        ngModel.$validators.compareTo = function(modelValue) {
+          return modelValue == scope.otherModelValue;
+        };
+
+        scope.$watch("otherModelValue", function() {
+          ngModel.$validate();
+        });
+      }
+    };
+  };
+
+  app.directive("compareTo", compareTo);
+
+
+
+
