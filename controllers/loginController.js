@@ -50,7 +50,7 @@
             $state.go("application");
 
         }).error(function(error){
-            console.error(error);
+            console.error(error); 
         });
     };
     //Init
