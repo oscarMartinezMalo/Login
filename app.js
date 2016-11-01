@@ -1,4 +1,4 @@
-var app= angular.module("UserAuthTutorial",["ui.router"]);
+var app= angular.module("UserAuthTutorial",["ui.router","ngMessages"]);
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 $urlRouterProvider.otherwise('/');

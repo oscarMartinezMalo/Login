@@ -56,6 +56,7 @@
     //Init
 })
 
+  app.directive("compareTo", compareTo);
   var compareTo = function() {
  
     return {
@@ -76,7 +77,7 @@
     };
   };
 
-  app.directive("compareTo", compareTo);
+
 
 
 
