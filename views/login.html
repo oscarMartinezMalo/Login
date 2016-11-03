@@ -1,28 +1,24 @@
-<form data-toggle="validator" name="myForm" role="form">
-    <div class="col-sm-10 col-sm-offset-1 form-group">
+<form name="myForm">
+    <div class="col-sm-10 col-sm-offset-1">
         <div class="col-sm-6">
             <h2>Sign Up</h2>
-            <input type="email" id="email" class="form-control" name="myEmail" ng-model="signUpInfo.username" placeholder="Email" minlength="5"  required>
-            <input type="email" class="form-control" name="remyEmail" placeholder="Confirm Email" ng-model="signUpInfo.reusername" compare-to="signUpInfo.username" minlength="5" required>
-            <input type="password" class="form-control" placeholder="Choose Password"  ng-model="signUpInfo.password" minlength="5" required >
-            <button ng-click="signUserUp()">Sign-Up</button>
-
-
-            <div ng-messages="myForm.myEmail.$error" role="alert">
-                <div ng-message="required">You did not enter your email address</div>
-                <div ng-message="email">Your email address is invalid</div>
-                <div ng-message="minlength">the Email field can be at most 15 characters long.</div>
-            </div>
-
+            <input type="email" name="myEmail" class="form-control" ng-model="signUpInfo.username" placeholder="Choose UserName" required minlength="10" maxlength="35">
+              <div ng-messages="myForm.myEmail.$error" ng-if="myForm.myEmail.$touched">
+                    <div ng-message="required">Please enter a value for this field.</div>
+                    <div ng-message="email">This field must be a valid email address.</div>
+                    <div ng-message="maxlength">This field can be at most 15 characters long.</div>
+                    <div ng-message="maxlength">This field can be at most 15 characters long.</div>
+              </div>
+            <input type="email" class="form-control" ng-model="signUpInfo.reusername" placeholder="Re-Enter UserName">
+            <input type="password" class="form-control" ng-model="signUpInfo.password" placeholder="Choose Password">
+            <button type="submit" ng-click="signUserUp()">Sign-Up</button>            
         </div>
-        <!--
+        
         <div class="col-sm-6">
             <h2>Log In</h2>
             <input type="text" class="form-control" ng-model="loginInfo.username" placeholder="Choose UserName">
             <input type="text" class="form-control" ng-model="loginInfo.password" placeholder="Password">
             <button ng-click="loginUser()">Sign-Up</button>
         </div>
-        -->
     </div>
 </form>
-
