@@ -1,16 +1,33 @@
-<form name="myForm">
+<form name="myForm" novalidate>
     <div class="col-sm-10 col-sm-offset-1">
         <div class="col-sm-6">
             <h2>Sign Up</h2>
-            <input type="email" name="myEmail" class="form-control" ng-model="signUpInfo.username" placeholder="Choose UserName" required minlength="10" maxlength="35">
-              <div ng-messages="myForm.myEmail.$error" ng-if="myForm.myEmail.$touched">
-                    <div ng-message="required">Please enter a value for this field.</div>
-                    <div ng-message="email">This field must be a valid email address.</div>
-                    <div ng-message="maxlength">This field can be at most 15 characters long.</div>
-                    <div ng-message="maxlength">This field can be at most 15 characters long.</div>
-              </div>
-            <input type="email" class="form-control" ng-model="signUpInfo.reusername" placeholder="Re-Enter UserName">
-            <input type="password" class="form-control" ng-model="signUpInfo.password" placeholder="Choose Password">
+            <input type="email" name="overwrittenEmail" class="form-control" ng-model="signUpInfo.username" placeholder="Choose UserName" required minlength="10" maxlength="35">
+                <div ng-messages="myForm.overwrittenEmail.$error" role="alert">
+                        <div ng-message="required">Please enter a value for this field.</div>
+                        <div ng-message="email">This field must be a valid email address.</div>
+                        <div ng-message="minlength">This field can be at least 10 characters long.</div>
+                        <div ng-message="maxlength">This field can be at most 35 characters long.</div>
+                        <div ng-message="compareTo">Do not mach the User</div>
+                </div>
+
+            <input type="email" name="reEmail" class="form-control" ng-model="signUpInfo.reusername" placeholder="Re-Enter UserName" required  compare-to="signUpInfo.username" >
+
+                <div ng-messages="myForm.reEmail.$error" role="alert">
+                        <div ng-message="required">Please enter a value for this field.</div>
+                        <div ng-message="email">This field must be a valid email address.</div>
+                        <div ng-message="maxlength">This field can be at most 15 characters long.</div>
+                        <div ng-message="maxlength">This field can be at most 15 characters long.</div>
+                        <div ng-message="compareTo">Do not mach the User</div>
+                </div>
+
+            <input type="password" name="myPassword" class="form-control" ng-model="signUpInfo.password" placeholder="Choose Password" required minlength="10" maxlength="35" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" >
+                <div ng-messages="myForm.myPassword.$error" role="alert">
+                        <div ng-message="required">Please enter a value for this field.</div>
+                        <div ng-message="maxlength">This field can be at most 15 characters long.</div>
+                        <div ng-message="maxlength">This field can be at most 15 characters long.</div>
+                        <div ng-message="ngPattern">Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or a symbol.)</div>
+                </div>
             <button type="submit" ng-click="signUserUp()">Sign-Up</button>            
         </div>
         
