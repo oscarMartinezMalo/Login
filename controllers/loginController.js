@@ -16,11 +16,10 @@ app.controller("LoginController", function($scope, $http, $state){
             username: $scope.signUpInfo.username,
             password: $scope.signUpInfo.password
         }
-
         $http.post('endpoints/signup.php',data).success(function(response){
             if(response == "User and Password are required")
             {
-              // alert("response");
+              //alert("User and password required");
             }else
             {
                 console.log(response.token);
