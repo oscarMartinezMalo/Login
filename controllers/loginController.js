@@ -12,6 +12,9 @@ app.controller("LoginController", function($scope, $http, $state){
     
     //Functions
     $scope.signUserUp =function (){
+        //Fade out the back grey screen
+        $(".modal-backdrop").remove();
+        
         var data= {
             username: $scope.signUpInfo.username,
             password: $scope.signUpInfo.password
