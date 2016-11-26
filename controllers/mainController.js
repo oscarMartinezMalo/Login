@@ -1,5 +1,5 @@
 app.controller("MainController", function ($scope,$state, $http, AuthenticationService){
- 
+
  var token ;
  if(localStorage['token']){
      token = localStorage['token'];     
@@ -8,7 +8,6 @@ app.controller("MainController", function ($scope,$state, $http, AuthenticationS
  }
 
     AuthenticationService.checkToken(token);
-
     $scope.logout = function(){
         var data = {
             token: token
@@ -23,3 +22,4 @@ app.controller("MainController", function ($scope,$state, $http, AuthenticationS
         });
     }
 })
+

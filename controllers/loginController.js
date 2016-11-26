@@ -1,5 +1,8 @@
 app.controller("LoginController", function($scope, $http, $state){
     //Variables
+    $scope.myVar='showSignUp';
+    $scope.actionMethod= "signUserUp";
+    
     $scope.signUpInfo={
         username:undefined,
         password:undefined
@@ -9,12 +12,23 @@ app.controller("LoginController", function($scope, $http, $state){
         username:undefined,
         password:undefined
     }
-    
+        $("#openModal").click(function(){
+                $("#myModal").modal("show");
+        });
+
+        $("#myModal").on('hidden.bs.modal', function () { 
+            document.getElementById("onlyForm").reset();
+            $scope.myForm.$setPristine();
+            $scope.myForm.$setValidity();
+            $scope.myForm.$setUntouched();
+             $scope.$apply();
+        });
+
     //Functions
     $scope.signUserUp =function (){
         //Fade out the back grey screen
         $(".modal-backdrop").remove();
-        
+
         var data= {
             username: $scope.signUpInfo.username,
             password: $scope.signUpInfo.password
@@ -37,6 +51,8 @@ app.controller("LoginController", function($scope, $http, $state){
     };
 
     $scope.loginUser = function (){
+        //Fade out the back grey screen
+        $(".modal-backdrop").remove();
         var data= {
             username: $scope.loginInfo.username,
             password: $scope.loginInfo.password
@@ -54,3 +70,4 @@ app.controller("LoginController", function($scope, $http, $state){
     //Init
 });
 
+ 
